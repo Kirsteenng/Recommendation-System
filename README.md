@@ -13,4 +13,9 @@ Procedure:
 3. Select variables and parameters to be fit into ALS.
 4. Build and test model.
 
+Project Owner: 
+* Kirsteenng
 
+Contributors:
+* Kirsteenng
+* sambk17
