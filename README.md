@@ -1,6 +1,6 @@
 # Movie Recommendation System using Alternating Least Square Matrix Factorization
 
-Dataset: [Movielens Dataset](https://grouplens.org/datasets/movielens/latest/)
+Dataset: [Movielens Dataset](https://grouplens.org/datasets/movielens/latest/)  
 In this exercise I have downloaded the [small dataset](https://files.grouplens.org/datasets/movielens/ml-latest-small.zip). Please save these data files in the same directory as the scripts and ALS model directory.
 
 Goal: 
