@@ -223,34 +223,4 @@ def get_rating_data(ratings, header):
         .cache()
     return rating_data
         
-########## ************************** ##########
 
-# load data
-#movie_rating = sc.textFile(os.path.join(data_path, 'ratings.csv'))
-# preprocess data -- only need ["userId", "movieId", "rating"]
-
-
-# line 107 operate on data that is not header
-# line 108 split the data(userId,movieId,rating) into individual tokens
-
-# check three rows
-#rating_data.take(3)     
-
-# splitting data into train, validation, test set
-#train, validation, test = rating_data.randomSplit([6,2,2],seed = 100)
-
-# # hyper-param config
-# num_iterations = 10
-# ranks = [8, 10, 12, 14, 16, 18, 20]
-# reg_params = [0.001, 0.01, 0.05, 0.1, 0.2]
-
-# # grid search and select best model
-# start_time = time.time()
-# final_model = train_ALS(train, validation, num_iterations, reg_params, ranks) #Q2: how do I export the final model?
-
-# print ('Total Runtime: {:.2f} seconds'.format(time.time() - start_time))
-
-# # create an array of num_iters
-# iter_array = list(range(1, 11))
-# # create learning curve plot
-# plot_learning_curve(iter_array, train, validation, 0.05, 20)

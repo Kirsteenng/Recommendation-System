@@ -10,7 +10,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import UserDefinedFunction, explode, desc
 from pyspark.sql.types import StringType, ArrayType
 from pyspark.mllib.recommendation import ALS
-import config
+import config # this contains the data path
 from training import *
 from EDA import EDA
 
@@ -27,8 +27,6 @@ spark = SparkSession \
 # get spark context
 sc = spark.sparkContext # Get or instantiate a SparkContext and register it as a singleton object.
  
-# path config
-#data_path = '/Users/Kirsteenng_1/Data Science/Movie Recommendation system'
 
 # Load data
 movies = spark.read.load(os.path.join(data_path, 'movies.csv'), format='csv', header=True, inferSchema=True)
@@ -61,13 +59,9 @@ num_iterations = 10
 ranks = [8, 10, 12, 14, 16, 18, 20]
 reg_params = [0.001, 0.01, 0.05, 0.1, 0.2]
 
-start_time = time.time()
-final_model = train_ALS(train, validation, num_iterations, reg_params, ranks) #Q2: how do I export the final model?
-
-
 # grid search and select best model
 start_time = time.time()
-final_model = train_ALS(train, validation, num_iterations, reg_params, ranks) #Q2: how do I export the final model?
+final_model = train_ALS(train, validation, num_iterations, reg_params, ranks) 
 
 print ('Total Runtime: {:.2f} seconds'.format(time.time() - start_time))
 
