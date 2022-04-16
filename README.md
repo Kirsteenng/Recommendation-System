@@ -22,6 +22,7 @@ Contributors:
 * Kirsteenng
 * sambk17
 
-Credit:
+Credit and reference:
 * https://github.com/yeomko22/ALS_implementation/blob/master/als.ipynb
 * https://towardsdatascience.com/prototyping-a-recommender-system-step-by-step-part-2-alternating-least-square-als-matrix-4a76c58714a1
+* http://yifanhu.net/PUB/cf.pdf
