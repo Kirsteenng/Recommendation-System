@@ -21,3 +21,7 @@ Project Owner:
 Contributors:
 * Kirsteenng
 * sambk17
+
+Credit:
+* https://github.com/yeomko22/ALS_implementation/blob/master/als.ipynb
+* https://towardsdatascience.com/prototyping-a-recommender-system-step-by-step-part-2-alternating-least-square-als-matrix-4a76c58714a1
