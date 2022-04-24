@@ -32,10 +32,10 @@ sc = spark.sparkContext # Get or instantiate a SparkContext and register it as a
  
 
 # Load data
-movies = spark.read.load(os.path.join(data_path, 'movies.csv'), format='csv', header=True, inferSchema=True)
-ratings = spark.read.load(os.path.join(data_path, 'ratings.csv'), format='csv', header=True, inferSchema=True)
-links = spark.read.load(os.path.join(data_path, 'links.csv'), format='csv', header=True, inferSchema=True)
-tags = spark.read.load(os.path.join(data_path, 'tags.csv'), format='csv', header=True, inferSchema=True)
+movies = spark.read.load(os.path.join(config.data_path, 'movies.csv'), format='csv', header=True, inferSchema=True)
+ratings = spark.read.load(os.path.join(config.data_path, 'ratings.csv'), format='csv', header=True, inferSchema=True)
+links = spark.read.load(os.path.join(config.data_path, 'links.csv'), format='csv', header=True, inferSchema=True)
+tags = spark.read.load(os.path.join(config.data_path, 'tags.csv'), format='csv', header=True, inferSchema=True)
 
 
 # ******************
