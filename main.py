@@ -12,12 +12,10 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import UserDefinedFunction, explode, desc
 from pyspark.sql.types import StringType, ArrayType
 from pyspark.mllib.recommendation import ALS
-#import config # this contains the data path
+import config # this contains the directory
 from training import *
 from EDA import EDA
 
-# Change the data path name here
-data_path = '/Users/Kirsteenng_1/Data Science/Movie Recommendation system'
 
 
 # spark config
