@@ -1,2 +1,2 @@
 # Change the data path name here
-data_path = ''
+data_path = './config/'
