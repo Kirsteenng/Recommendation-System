@@ -5,14 +5,11 @@ Contains functions to train ALS model.
 
 # spark imports
 from pyspark.mllib.recommendation import ALS
-from pyspark.sql import SparkSession
 
 # libraries for plotting and analysis
 import config as cf
-import matplotlib as plt
+from matplotlib import pyplot as plt
 import math
-import time
-import os
 
 def train_ALS(train_data, validation_data, num_iters, reg_param, ranks):
     """

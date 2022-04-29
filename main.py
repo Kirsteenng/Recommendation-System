@@ -5,15 +5,11 @@ Allows users to input desired movies and output movie recommendations.
 import os
 import time
 import math
-from tqdm import tqdm
 
 # spark imports
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import UserDefinedFunction, explode, desc
-from pyspark.sql.types import StringType, ArrayType
-from pyspark.mllib.recommendation import ALS
 import config # this contains the directory
-from training import *
+from training import train_ALS, plot_learning_curve, make_recommendation, make_predictions
 from EDA import EDA
 
 
@@ -32,10 +28,10 @@ sc = spark.sparkContext # Get or instantiate a SparkContext and register it as a
  
 
 # Load data
-movies = spark.read.load(os.path.join(data_path, 'movies.csv'), format='csv', header=True, inferSchema=True)
-ratings = spark.read.load(os.path.join(data_path, 'ratings.csv'), format='csv', header=True, inferSchema=True)
-links = spark.read.load(os.path.join(data_path, 'links.csv'), format='csv', header=True, inferSchema=True)
-tags = spark.read.load(os.path.join(data_path, 'tags.csv'), format='csv', header=True, inferSchema=True)
+movies = spark.read.load(os.path.join(config.data_path, 'movies.csv'), format='csv', header=True, inferSchema=True)
+ratings = spark.read.load(os.path.join(config.data_path, 'ratings.csv'), format='csv', header=True, inferSchema=True)
+links = spark.read.load(os.path.join(config.data_path, 'links.csv'), format='csv', header=True, inferSchema=True)
+tags = spark.read.load(os.path.join(config.data_path, 'tags.csv'), format='csv', header=True, inferSchema=True)
 
 
 # ******************
@@ -45,7 +41,7 @@ EDA(spark, ratings, movies, links, tags)
 
 
 # Train ALS model
-movie_rating = sc.textFile(os.path.join(data_path, 'ratings.csv'))
+movie_rating = sc.textFile(os.path.join(config.data_path, 'ratings.csv'))
 header = movie_rating.take(1)[0]
 rating_data = movie_rating.filter(lambda line: line!=header).map(lambda line: line.split(",")).map(lambda tokens: (int(tokens[0]), int(tokens[1]), float(tokens[2]))).cache()
     
