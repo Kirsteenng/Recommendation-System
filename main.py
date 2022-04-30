@@ -8,7 +8,7 @@ import math
 
 # spark imports
 from pyspark.sql import SparkSession
-from config import * # this contains the directory
+import config # this contains the directory
 from training import train_ALS, plot_learning_curve, make_recommendation, make_predictions
 from EDA import EDA
 
