@@ -125,7 +125,7 @@ def get_inference_data(train_data, df_movies, movieId_list,user_id):
     inference data: Spark RDD
     """
     # get new user id
-    new_id = train_data.map(lambda r: r[0]).max() + 1
+    
     # return inference rdd
     return df_movies.rdd \
         .map(lambda r: r[0]) \
@@ -162,7 +162,7 @@ def add_new_user_to_data(train_data, movieId_list, spark_context):
     return train_data.union(new_rdd)
 
 
-def make_recommendation(movies,best_model_params, ratings_data, df_movies,fav_movie_list, n_recommendations, spark_context):
+def make_recommendation(movies,best_model_params, ratings_data, df_movies,fav_movie_list, n_recommendations, spark_context,user_id):
     """
     return top n movie recommendation based on user's input list of favorite movies
 
@@ -185,11 +185,13 @@ def make_recommendation(movies,best_model_params, ratings_data, df_movies,fav_mo
     ------
     list of top n movie recommendations
     """
+    
     # modify train data by adding new user's rows
     movieId_list = get_movieId(df_movies, fav_movie_list,movies)
 
     train_data = add_new_user_to_data(ratings_data, movieId_list, spark_context) 
     #wouldnt this cause duplication if the user's data is already in the training dataset?
+    new_id = train_data.map(lambda r: r[0]).max()
     
     # train best ALS
     model = ALS.train(
@@ -200,7 +202,7 @@ def make_recommendation(movies,best_model_params, ratings_data, df_movies,fav_mo
         seed=100)   
     
     # get inference rdd
-    inference_rdd = get_inference_data(ratings_data, df_movies, movieId_list)
+    inference_rdd = get_inference_data(ratings_data, df_movies, movieId_list,new_id)
     
     # inference
     predictions = model.predictAll(inference_rdd).map(lambda r: (r[1], r[2]))

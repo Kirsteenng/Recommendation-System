@@ -25,7 +25,7 @@ spark = SparkSession \
     .getOrCreate()
 # get spark context
 sc = spark.sparkContext # Get or instantiate a SparkContext and register it as a singleton object.
- 
+
 
 # Load data
 movies = spark.read.load(os.path.join(config.data_path, 'movies.csv'), format='csv', header=True, inferSchema=True)
@@ -88,7 +88,7 @@ print('Recommendations for {}:'.format(my_favorite_movies[0]))
 for i, title in enumerate(recommendations):
     print('{0}: {1}'.format(i+1, title))
 
-# get recommendation
+# get recommendation by assuming user is new ie iserId = max(current user id)+1) 
 recommends = make_recommendation(
     movies = movies,
     best_model_params={'iterations': 10, 'rank': 15, 'lambda_': 0.05}, 
@@ -96,9 +96,7 @@ recommends = make_recommendation(
     df_movies=movies, 
     fav_movie_list=my_favorite_movies, 
     n_recommendations=5, 
-    spark_context=sc)
+    spark_context=sc,user_id = my_user_id)
 
     
-    
-# TOOD: look at 
     
