@@ -11,7 +11,7 @@ from pyspark.sql import SparkSession
 import config # this contains the directory
 from training import train_ALS, plot_learning_curve, make_recommendation, make_predictions
 from EDA import EDA
-
+from NDCG import compute_NDCG
 
 
 # spark config
@@ -63,17 +63,37 @@ final_model = train_ALS(train, validation, num_iterations, reg_params, ranks)  #
 print ('Total Runtime: {:.2f} seconds'.format(time.time() - start_time))
 
 
-# insert evaluation stage
-
-
 # create an array of num_iters
 iter_array = list(range(1, 11))
 # create learning curve plot
 plot_learning_curve(iter_array, train, validation, 0.05, 20)
 
+
+
+# insert evaluation stage using NDCG
+
+test_x = test.map(lambda p: (p[0], p[1]))
+test_y = test.map(lambda p:p[2])
+
+pred_test = final_model.predictAll(test_x).map(lambda r: (r[0],r[1],r[2]))
+pred_test_df = pred_test.map(lambda x:(x[0],x[1],x[2])).toDF(('userId','movieId','rating')).toPandas()
+
+# Note that the input length and predictied output length are not the same
+# Question: why is it not the same?
+test_x.count()
+pred_test.count()
+
+# find top ten movies for each user for original and predicted
+test_df = test.map(lambda x:(x[0],x[1],x[2])).toDF(('userId','movieId','rating')).toPandas()
+ndcg = compute_NDCG(test_df,pred_test_df)
+print('NDCG score: ',ndcg)
+
+
+
+
 # User's favorite movies
 my_user_id = 360 #this user id allows final_model to get relevant data for the same user
-my_favorite_movies = ['Gandhi','Fantasia','Scream'] # turn this into user ID, product ID and find similar movies
+my_favorite_movies = ['Batman','Fantasia','Scream'] # turn this into user ID, product ID and find similar movies
 
 # make recommendations using the final model
 recommendations = make_predictions(movies = movies,
