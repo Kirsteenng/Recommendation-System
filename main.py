@@ -78,10 +78,7 @@ test_y = test.map(lambda p:p[2])
 pred_test = final_model.predictAll(test_x).map(lambda r: (r[0],r[1],r[2]))
 pred_test_df = pred_test.map(lambda x:(x[0],x[1],x[2])).toDF(('userId','movieId','rating')).toPandas()
 
-# Note that the input length and predictied output length are not the same
-# Question: why is it not the same?
-test_x.count()
-pred_test.count()
+
 
 # find top ten movies for each user for original and predicted
 test_df = test.map(lambda x:(x[0],x[1],x[2])).toDF(('userId','movieId','rating')).toPandas()
@@ -89,7 +86,17 @@ ndcg = compute_NDCG(test_df,pred_test_df)
 print('NDCG score: ',ndcg)
 
 
-
+# =============================================================================
+# # Note that the input length and predictied output length are not the same
+# # Question: why is it not the same?
+# # Script to inspect the difference
+# test_x.count()
+# pred_test.count()89
+# test_tuple = list(zip(test_df.userId, test_df.movieId))
+# pred_tuple = list(zip(pred_test_df.userId, pred_test_df.movieId))
+# diff = set(test_tuple) - set(pred_tuple)
+# gp = test_df.groupby('movieId').agg('count').reset_index()
+# =============================================================================
 
 # User's favorite movies
 my_user_id = 360 #this user id allows final_model to get relevant data for the same user
