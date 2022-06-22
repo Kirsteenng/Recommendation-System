@@ -12,7 +12,7 @@ Procedure:
 1. Conduct EDA to understand the dataset. The EDA procedures and answers are listed under EDA.py.  
 2. Build and train ALS model, which is under training.py.
 3. Test model.
-4. Evaluate ALS model using RMSE. Other evaluation methods such as nDCG@k and MAP@k will also be compared.
+4. Evaluate ALS model using NDCG.
 
 
 Project Owner: 
@@ -26,3 +26,4 @@ Credit and reference:
 * https://github.com/yeomko22/ALS_implementation/blob/master/als.ipynb
 * https://towardsdatascience.com/prototyping-a-recommender-system-step-by-step-part-2-alternating-least-square-als-matrix-4a76c58714a1
 * http://yifanhu.net/PUB/cf.pdf
+* https://towardsdatascience.com/evaluate-your-recommendation-engine-using-ndcg-759a851452d1
