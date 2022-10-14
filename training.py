@@ -7,7 +7,6 @@ Contains functions to train ALS model.
 from pyspark.mllib.recommendation import ALS
 
 # libraries for plotting and analysis
-import config as cf
 from matplotlib import pyplot as plt
 import math
 

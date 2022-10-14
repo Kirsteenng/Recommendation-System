@@ -1,7 +1,10 @@
 # Movie Recommendation System using Alternating Least Square (ALS) Matrix Factorization
 
-Dataset: [Movielens Dataset](https://grouplens.org/datasets/movielens/latest/)  
-In this exercise I have downloaded the [small dataset](https://files.grouplens.org/datasets/movielens/ml-latest-small.zip). Save the pathname under the variable data_path in config.py. 
+* Dataset: [Movielens Dataset](https://grouplens.org/datasets/movielens/latest/)  
+In this exercise I have downloaded the [small dataset](https://files.grouplens.org/datasets/movielens/ml-latest-small.zip). Create a folder called `/data/` and save the files from the zip under the `/data/` folder. The default pathway is set for `/data/`, but you can pass a different pathway as an argument (e.g. `python main.py -data_path <pathway>`)
+
+* Requirements
+Download the Python requirements to your local machine using the requirements.txt file.  e.g. `pip install -r requirements.txt`
 
 Goal: 
 1. Understand the concept of Matrix Factorization and Alternating Least Square(ALS). This is achieved by implementing ALS according to this [paper](http://yifanhu.net/PUB/cf.pdf)
